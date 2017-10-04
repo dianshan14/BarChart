@@ -1,0 +1,16 @@
+.bar:hover {
+    fill: #9C3933;
+}
+
+div {
+    border: 1px solid black;
+}
+
+body {
+    background-color: #151716;
+}
+
+
+svg g text.value:hover::selection {
+    display: initial;
+}
