@@ -31,7 +31,7 @@ var margin = { top: 40, right: 20, bottom: 30, left: 40},
     width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var div = d3.select("body")
+var svg = d3.select("body")
             .append("svg")
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
@@ -49,7 +49,7 @@ var xScale = d3.scaleBand()
                .padding(0.1);
 
 
-div.selectAll("rect")
+svg.selectAll("rect")
    .data(data)
    .enter()
    .append("rect")
@@ -59,9 +59,21 @@ div.selectAll("rect")
    .attr('width', xScale.bandwidth())
    .attr('height', function(d,i){ return height-yScale(d.num*100); })
    .attr('class', "bar")
-   .attr('fill', "#E1B689");
+   .attr('fill', "#FFB300")
+   .on("mouseenter", function(d,i){
+        d3.selectAll("svg g text.value")
+          .filter(function(d,ind){ return ind === i;})
+          .style("display", "initial");
+   })
+   .on("mouseleave", function(d,i){
+        d3.selectAll("svg g text.value")
+          .style("display", "none");
+   });
 
-div.selectAll("text")
+
+
+
+svg.selectAll("text")
    .data(data)
    .enter()
    .append("text")
@@ -76,7 +88,7 @@ div.selectAll("text")
 var yAxis = d3.axisLeft(yScale)
               .tickFormat(function(d){ return d+"%" ;});
 
-div.append("g")
+svg.append("g")
    .attr('transform', "translate(-10,0)")
    .call(yAxis)
    .selectAll("*")
@@ -84,7 +96,7 @@ div.append("g")
 
 var xAxis = d3.axisBottom(xScale);
 
-div.append("g")
+svg.append("g")
    .attr('transform', "translate(0," + height + ")")
    .call(xAxis)
    .selectAll("*")

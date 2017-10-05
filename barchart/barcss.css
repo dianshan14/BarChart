@@ -1,5 +1,5 @@
 .bar:hover {
-    fill: #9C3933;
+    fill: #9DCCCA;
 }
 
 div {
@@ -7,9 +7,12 @@ div {
 }
 
 body {
-    background-color: #151716;
+    background-color: #20221A;
 }
 
+svg g text.value {
+    display: none;
+}
 
 svg g text.value:hover::selection {
     display: initial;
